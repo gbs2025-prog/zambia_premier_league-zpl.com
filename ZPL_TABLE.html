@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zambian League Table</title>
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      background-color: white;
+      flex-wrap: wrap;
+    }
+
+    .header-logos img {
+      width: 80px;
+      height: auto;
+    }
+
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 10px 20px;
+      background-color: white;
+      border-bottom: 3px solid #ddd;
+    }
+
+    .logo-row img {
+      height: 50px;
+      width: auto;
+      border: 2px solid black;
+      border-radius: 5px;
+      background-color: white;
+      padding: 2px;
+      transition: transform 0.3s;
+    }
+
+    .logo-row img:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+
+    .table-container {
+      border: 10px solid;
+      border-image: linear-gradient(to right, green, red, black, orange) 1;
+      margin: 20px auto;
+      padding: 15px;
+      max-width: 1000px;
+      background-color: white;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+      min-width: 700px; /* for horizontal scroll on small devices */
+    }
+
+    caption {
+      caption-side: top;
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: green;
+    }
+
+    th,
+    td {
+      border: 1px solid lightblue;
+      padding: 10px 5px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #d0f0ff;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f0faff;
+    }
+
+    /* Table team logo inside cell */
+    td.team-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 10px;
+      text-align: left;
+    }
+
+    td.team-cell img {
+      height: 20px;
+      width: auto;
+      border-radius: 3px;
+    }
+
+    /* News ticker styles */
+    .news-ticker {
+      background: linear-gradient(90deg, #008000 0%, #ff8c00 50%, #000000 100%);
+      color: white;
+      font-weight: bold;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      margin: 0 auto 20px;
+      max-width: 1000px;
+      border-radius: 5px;
+    }
+
+    .news-ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background-color: #222;
+      color: #bbb;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 14px;
+      margin-top: auto;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .header-logos img {
+        width: 60px;
+      }
+
+      table {
+        font-size: 12px;
+        min-width: 600px;
+      }
+
+      th,
+      td {
+        padding: 6px 3px;
+      }
+
+      caption {
+        font-size: 18px;
+      }
+
+      .logo-row {
+        gap: 8px;
+      }
+
+      .logo-row img {
+        height: 40px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        min-width: 500px;
+      }
+    }
+.news-ticker {
+  background-color: #111;
+  color: #fff;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  border-top: 2px solid #ffcc00;
+  border-bottom: 2px solid #ffcc00;
+}
+.news-ticker marquee {
+  white-space: nowrap;
+}
+  .table-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  caption {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  thead th {
+    border-bottom: 2px solid #000;
+    padding: 10px;
+    background-color: #f0f0f0;
+    text-align: center;
+  }
+  tbody td {
+    border-bottom: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  /* Left align team column */
+  tbody td:nth-child(2) {
+    text-align: left;
+    padding-left: 10px;
+  }
+  /* Highlight top 1st */
+  tbody tr:nth-child(1) {
+    background-color: #d4fcdc;
+  }
+  /* Highlight 2nd */
+  tbody tr:nth-child(2) {
+    background-color: #d4e8fc;
+  }
+  /* Highlight bottom 4 (last 4 rows) */
+  tbody tr:nth-last-child(-n+4) {
+    background-color: #fcd4d4;
+  }
+  /* No vertical lines */
+  table, th, td {
+    border-left: none;
+    border-right: none;
+  }
+  /* Align images and text in Team column */
+  tbody td img {
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  </style>
+</head>
+<body>
+<nav>
+  <select onchange="location.href=this.value">
+    <option value="#">Navigate</option>
+    <option value="ZPL_HOME.html">HOME</option>
+    <option value="LAT.html">LEAGUE AND TOURNAMENTS</option>
+  </select>
+</nav>
+<!-- Logos Section -->
+<div class="header-logos">
+  <img src="faz.png" alt="Logo 1">
+  <img src="zpl.jpg" alt="Logo 2">
+  <img src="fifa.png" alt="Logo 3">
+</div>
+<div class="logo-row">
+  <a href="PD.html"><img src="PD.png" alt="Power Dynamos" title="Power Dynamos"></a>
+  <a href="ZE.html"><img src="ZE.png" alt="Zesco United" title="Zesco United"></a>
+  <a href="N.html"><img src="N.png" alt="Nkana FC" title="Nkana FC"></a>
+  <a href="GB.html"><img src="GB.jpg" alt="Green Buffaloes" title="Green Buffaloes"></a>
+  <a href="AL.html"><img src="AL.jpeg" alt="Athletico Lusaka" title="Athletico Lusaka"></a>
+  <a href="GE.html"><img src="GE.png" alt="Green Eagles" title="Green Eagles"></a>
+  <a href="NR.html"><img src="NR.jpeg" alt="Nchanga Rangers" title="Nchanga Rangers"></a>
+  <a href="KW.html"><img src="KW.jpg" alt="Kabwe Warriors" title="Kabwe Warriors"></a>
+  <a href="NZ.html"><img src="NZ.jpeg" alt="Nkwazi FC" title="Nkwazi FC"></a>
+  <a href="M.html"><img src="M.jpg" alt="Muza FC" title="Muza FC"></a>
+  <a href="MS.html"><img src="MS.jpeg" alt="Mutondo Stars" title="Mutondo Stars"></a>
+  <a href="ZA.html"><img src="ZA.png" alt="Zanaco FC" title="Zanaco FC"></a>
+  <a href="RA.html"><img src="RA.jpeg" alt="Red Arrows" title="Red Arrows"></a>
+  <a href="NS.html"><img src="NS.jpeg" alt="NAPSA Stars" title="NAPSA Stars"></a>
+  <a href="I.html"><img src="I.jpeg" alt="Indeni FC" title="Indeni FC"></a>
+  <a href="MW.html"><img src="MW.png" alt="Mufurila Wanderers" title="Mufurila Wanderers"></a>
+  <a href="FR.html"><img src="FR.jpeg" alt="Forest Rangers" title="Forest Rangers"></a>
+  <a href="LR.html"><img src="LR.jpeg" alt="Lumwana Radiants" title="Lumwana Radiants"></a>
+</div>
+
+<div class="table-container">
+  <table>
+    <caption>ZAMBIA PREMIER LEAGUE TABLE</caption>
+ <caption>2024/25 SEASON</caption>
+    <thead>
+      <tr>
+        <th>Pos</th>
+        <th>Team</th>
+        <th>P</th>
+        <th>W</th>
+        <th>D</th>
+        <th>L</th>
+        <th>GF</th>
+        <th>GA</th>
+        <th>GD</th>
+        <th>Pts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><img src="PD.png" height="20">Power Dynamos</td><td>34</td><td>22</td><td>8</td><td>4</td><td>60</td><td>25</td><td>+35</td><td>74</td></tr>
+      <tr><td>2</td><td><img src="ZE.png" height="20">Zesco United</td><td>34</td><td>20</td><td>10</td><td>4</td><td>55</td><td>28</td><td>+27</td><td>70</td></tr>
+      <tr><td>3</td><td><img src="N.png" height="20">Nkana FC</td><td>34</td><td>18</td><td>11</td><td>5</td><td>50</td><td>30</td><td>+20</td><td>65</td></tr>
+      <tr><td>4</td><td><img src="RA.jpeg" height="20">Red Arrows</td><td>34</td><td>11</td><td>10</td><td>13</td><td>34</td><td>39</td><td>-5</td><td>43</td></tr>
+      <tr><td>5</td><td><img src="KW.jpg" height="20">Kabwe Warriors</td><td>34</td><td>13</td><td>12</td><td>9</td><td>39</td><td>36</td><td>+3</td><td>51</td></tr>
+      <tr><td>6</td><td><img src="NZ.jpeg" height="20">Nkwazi Football Club</td><td>34</td><td>12</td><td>9</td><td>13</td><td>36</td><td>40</td><td>-4</td><td>45</td></tr>
+      <tr><td>7</td><td><img src="MW.png" height="20">Mufulira Wanderers</td><td>34</td><td>9</td><td>8</td><td>17</td><td>28</td><td>47</td><td>-19</td><td>35</td></tr>
+      <tr><td>8</td><td><img src="M.jpg" height="20">Muza FC</td><td>34</td><td>5</td><td>9</td><td>20</td><td>20</td><td>55</td><td>-35</td><td>24</td></tr>
+      <tr><td>9</td><td><img src="NS.jpeg" height="20">Napsa Stars</td><td>34</td><td>14</td><td>11</td><td>9</td><td>40</td><td>34</td><td>+6</td><td>53</td></tr>
+      <tr><td>10</td><td><img src="GB.jpg" height="20">Green Buffaloes</td><td>34</td><td>17</td><td>9</td><td>8</td><td>48</td><td>32</td><td>+16</td><td>60</td></tr>
+      <tr><td>11</td><td><img src="NR.jpeg" height="20">Nchanga Rangers</td><td>34</td><td>6</td><td>10</td><td>18</td><td>22</td><td>52</td><td>-30</td><td>28</td></tr>
+      <tr><td>12</td><td><img src="MS.jpeg" height="20">Mutondo Stars</td><td>34</td><td>7</td><td>11</td><td>16</td><td>25</td><td>50</td><td>-25</td><td>32</td></tr>
+      <tr><td>13</td><td><img src="ZA.png" height="20">Zanaco FC</td><td>34</td><td>9</td><td>10</td><td>15</td><td>30</td><td>44</td><td>-14</td><td>37</td></tr>
+      <tr><td>14</td><td><img src="AL.jpeg" height="20">Athletico Lusaka FC</td><td>34</td><td>8</td><td>9</td><td>17</td><td>27</td><td>48</td><td>-21</td><td>33</td></tr>
+      <tr><td>15</td><td><img src="GE.png" height="20">Green Eagles</td><td>34</td><td>10</td><td>9</td><td>15</td><td>32</td><td>43</td><td>-11</td><td>39</td></tr>
+      <tr><td>16</td><td><img src="FR.jpeg" height="20">Forest Rangers</td><td>34</td><td>13</td><td>10</td><td>11</td><td>38</td><td>38</td><td>0</td><td>49</td></tr>
+      <tr><td>17</td><td><img src="LR.jpeg" height="20">Lumwana Radiants</td><td>34</td><td>15</td><td>10</td><td>9</td><td>45</td><td>35</td><td>+10</td><td>55</td></tr>
+      <tr><td>18</td><td><img src="I.jpeg" height="20">Indeni Football Club</td><td>34</td><td>10</td><td>11</td><td>13</td><td>33</td><td>41</td><td>-8</td><td>41</td></tr>
+    </tbody>
+  </table>
+<!-- Legend / Indicators Section with Images and Colored Stickers -->
+<div style="max-width: 1200px; margin: 20px auto; font-family: Arial, sans-serif;">
+  <h3>QUALIFICATION/RELEGATION</h3>
+  <ul style="list-style: none; padding-left: 0; display: flex; flex-wrap: wrap; gap: 30px;">
+    
+    <li style="display: flex; align-items: center;">
+      <span style="display:inline-block; width: 12px; height: 12px; background-color: lightgreen; border-radius: 50%; margin-right: 6px;"></span>
+      <img src="CCL.JFIF" height="20" style="margin-right: 8px;" alt="CAF Champions League Icon">
+      CAF Champions League
+    </li>
+
+    <li style="display: flex; align-items: center;">
+      <span style="display:inline-block; width: 12px; height: 12px; background-color: lightblue; border-radius: 50%; margin-right: 6px;"></span>
+      <img src="CCL1.JFIF" height="20" style="margin-right: 8px;" alt="CAF Confederation Cup Icon">
+      CAF Confederation Cup
+    </li>
+
+    <li style="display: flex; align-items: center;">
+<span style="display:inline-block; width: 12px; height: 12px; background-color: red; border-radius: 50%; margin-right: 6px;"></span>
+      <img src="RED.png" height="20" style="margin-right: 8px;" alt="Relegation Zone Icon">
+      Relegation Zone
+    </li>
+    
+  </ul>
+</div>
+
+
+</div>
+
+<!-- News Ticker for Fixtures and Match Results -->
+<div class="news-ticker">
+  <marquee behavior="scroll" direction="left" scrollamount="6">
+    🏆 Upcoming Fixtures: ZESCO United vs Nkana FC • Green Buffaloes vs Power Dynamos • Red Arrows vs NAPSA Stars • Forest Rangers vs Konkola Blades • 
+    📊 Recent Results: Athletico Lusaka 2-1 Green Eagles • Power Dynamos 0-0 ZESCO United • Nkana FC 1-3 Red Arrows • Green Buffaloes 2-2 NAPSA Stars • ...
+  </marquee>
+</div>
+<!-- Footer -->
+<footer style="background-color:#000; color:#ffcc00; padding: 15px; text-align: center; font-weight: bold;">
+  &copy; 2025 Sande Tech Solutions — Proudly Zambian | All Rights Reserved
+</footer>
+
+</body>
+</html>

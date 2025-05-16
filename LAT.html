@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zambian Football Hub</title>
+  <style>
+    :root {
+      --green: #006400;
+      --red: #ff0000;
+      --black: #000000;
+      --orange: #ff7f00;
+      --bg-light: #f9f9f9;
+      --text-dark: #222;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      border: 12px solid transparent;
+      border-image: linear-gradient(to top left, var(--green), var(--red), var(--black), var(--orange)) 1;
+      box-sizing: border-box;
+    }
+
+    header {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px 10px;
+    }
+
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .logo-row img {
+      height: 70px;
+    }
+
+    .ticker {
+      background-color: var(--black);
+      color: white;
+      overflow: hidden;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 18s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    main {
+      max-width: 1300px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .grid-container a {
+      display: block;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .grid-container a:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .grid-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .logo-row img {
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <select onchange="location.href=this.value">
+    <option value="#">Navigate</option>
+    <option value="ZPL_HOME.html">HOME</option>
+    <option value="ZPL_TABLE.html">LEAGUE TABLE</option>
+  </select>
+</nav>
+
+<!-- Header Logos -->
+  <header>
+    <div class="logo-row">
+     <img src="faz.png" alt="Logo 1">
+  <img src="zpl.jpg" alt="Logo 2">
+  <img src="fifa.png" alt="Logo 3">
+    </div>
+  </header>
+  <!-- News Ticker -->
+  <div class="ticker">
+    <div class="ticker-text">
+      🇿🇲 Breaking: FAZ Super League final week fixtures released | 🏆 Zambian U20 wins COSAFA Cup | ⚽ 2025 CAF Interclub tournaments to kick off in August | 📢 Stay tuned for full league results and stats!
+    </div>
+  </div>
+
+  <!-- Main Content Grid -->
+  <main>
+    <div class="grid-container">
+      <a href="tournament1.html"><img src="c.jfif" alt="Tournament 1"></a>
+      <a href="tournament2.html"><img src="pl.jfif" alt="Tournament 2"></a>
+      <a href="tournament3.html"><img src="ac.png" alt="Tournament 3"></a>
+      <a href="tournament4.html"><img src="afcon.png" alt="Tournament 4"></a>
+      <a href="tournament5.html"><img src="afcon17.png" alt="Tournament 5"></a>
+      <a href="tournament6.html"><img src="afcon20.jfif" alt="Tournament 6"></a>
+      <a href="tournament7.html"><img src="afcon23.png" alt="Tournament 7"></a>
+      <a href="tournament8.html"><img src="CCL.jfif" alt="Tournament 8"></a>
+      <a href="tournament9.html"><img src="CCL1.jfif" alt="Tournament 9"></a>
+      <a href="tournament10.html"><img src="CCL2.png" alt="Tournament 10"></a>
+      <a href="tournament11.html"><img src="ce.jfif" alt="Tournament 11"></a>
+      <a href="tournament12.html"><img src="c17.WEBP" alt="Tournament 12"></a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Zambian Football Portal. Powered by Sande Tech Solutions.
+  </footer>
+
+</body>
+</html>

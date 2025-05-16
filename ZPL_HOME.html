@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZPL.COM - Zambian Premier League</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: #000;
+      margin: 0;
+      padding: 0;
+      border-top: 8px solid green;
+      border-bottom: 8px solid red;
+      border-left: 8px solid black;
+      border-right: 8px solid orange;
+    }
+
+    header{
+  background: linear-gradient(to right, green, red, black);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  border-bottom: 2px solid #ccc;
+  color: white;
+
+    }
+
+    header img.logo {
+      height: 70px;
+    }
+
+   header h1 {
+  font-size: 2rem;
+  color: white;
+  flex-grow: 1;
+  text-align: center;
+}
+
+
+    nav select {
+      padding: 8px;
+      font-size: 1rem;
+    }
+
+    .match-results {
+      overflow: hidden;
+      height: 200px;
+      position: relative;
+      background: #f4f4f4;
+      border-top: 4px solid #000;
+      border-bottom: 4px solid #000;
+      display: flex;
+      justify-content: center;
+    }
+
+    .match-grid {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      animation: scrollUp 15s linear infinite;
+    }
+
+    @keyframes scrollUp {
+      0% {
+        top: 100%;
+      }
+      100% {
+        top: -100%;
+      }
+    }
+
+    .match-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .match-row img {
+      height: 30px;
+      margin: 0 10px;
+    }
+
+    .top-scorers {
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    .scorer {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+    }
+
+    .scorer img.player-pic {
+      height: 50px;
+      width: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .scorer img.team-logo {
+      height: 30px;
+      width: 30px;
+      margin-left: 10px;
+    }
+
+    .progress {
+      height: 20px;
+      background-color: gold;
+      margin-left: 10px;
+      flex-grow: 1;
+    }
+
+    .news-ticker {
+      background: #333;
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+
+    .ticker-content {
+      display: inline-block;
+      animation: ticker 15s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .news-section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .news-headlines {
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 20px;
+      overflow: hidden;
+      animation: scrollNews 40s linear infinite;
+    }
+
+    .news-item {
+      width: 200px;
+      flex-shrink: 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
+    .news-item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .news-item p {
+      padding: 10px;
+      margin: 0;
+      background-color: #fff;
+      font-weight: bold;
+    }
+
+    @keyframes scrollNews {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+.live-matches-section {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.live-matches-section h1 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #222;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.match-status {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f8f8f8;
+}
+
+.match-status img {
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+.match-phase {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.live-sticker {
+  color: red;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.timer {
+  font-family: monospace;
+  margin-left: 10px;
+  color: #333;
+}
+
+.controls button {
+  margin: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.controls button:hover {
+  background: #0056b3;
+}
+
+ body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      color: #1a5d1a;
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    thead {
+      background-color: #1a5d1a;
+      color: #fff;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 15px;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+      background-color: #eafbea;
+    }
+
+    .highlight-top {
+      background-color: #d4fcd4 !important;
+      font-weight: bold;
+    }
+
+    .highlight-bottom {
+      background-color: #fddede !important;
+      font-style: italic;
+    }
+
+    @media screen and (max-width: 600px) {
+      table, th, td {
+        font-size: 12px;
+      }
+    }
+.player-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.club-logo {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+#transferFilters select {
+  padding: 6px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.headlines-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 30px auto;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.headline-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  background: #ddd;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.arrow:hover {
+  background: #bbb;
+}
+
+.headline-content {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#headlineImage {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+#headlineText {
+  font-size: 1.1rem;
+  color: #333;
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+.upcoming-matches {
+  text-align: center; /* Center text and inline elements */
+  margin: 0 auto; /* Horizontally center the section */
+  padding: 20px;
+  max-width: 800px; /* Optional: limit width for better readability */
+}
+
+.upcoming-matches h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.match-status {
+  margin: 15px 0;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+  </style>
+</head>
+<script>
+  // Check login status
+  if (localStorage.getItem("isLoggedIn") !== "true") {
+    // Not logged in? Redirect to login page
+    window.location.href = "ZPL_LOGIN.html";
+  }
+
+<body>
+</script>
+<button onclick="logout()">Logout</button>
+
+<script>
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "ZPL_LOGIN.html";
+  }
+</script>
+  <header>
+    <nav>
+  <select onchange="location.href=this.value">
+    <option value="#">Navigate</option>
+    <option value="ZPL_TABLE.html">HOME</option>
+    <option value="LAT.html">LEAGUE AND TOURNAMENTS</option>
+  </select>
+</nav>
+
+   <!-- Logos Section -->
+<div style="display: flex; justify-content: center; align-items: center; gap: 20px; padding: 20px 0;">
+  <img src="zpl.jpg" alt="Premier Logo" class="logo" style="height: 60px;">
+  <img src="faz.png" alt="FAZ Logo" class="logo" style="height: 60px;">
+</div>
+
+    <h1>ZAMBIAN PREMIER LEAGUE</h1>
+  </header>
+
+<section id="LATEST HEADLINES" class="headlines-section">
+  <h2>📰 LATEST HEADLINES</h2>
+  <div class="headline-container">
+    <button class="arrow" onclick="prevHeadline()">&#8592;</button>
+    
+    <div class="headline-content">
+      <img id="headlineImage" src="" alt="Headline Image">
+      <p id="headlineText">Loading latest news...</p>
+    </div>
+    
+    <button class="arrow" onclick="nextHeadline()">&#8594;</button>
+  </div>
+</section>
+
+
+<section class="live-matches-section">
+  <h1>LIVE MATCHES</h1>
+
+  <div class="match-status" data-id="0">
+    <img src="ZE.png" alt="Zesco" height="30" />
+    Zesco (0) vs (5) Zanaco
+    <img src="ZA.png" alt="Zanaco" height="30" /> -
+    <strong class="match-phase">First Half</strong>
+    <span class="live-sticker">LIVE</span>
+    <span class="timer">00:00</span>
+    <div class="controls">
+      <button onclick="startTimer(0)">Start</button>
+      <button onclick="pauseTimer(0)">Pause</button>
+      <button onclick="stopTimer(0)">Stop</button>
+      <button onclick="continueET(0)">Continue (ET)</button>
+    </div>
+  </div>
+
+  <div class="match-status" data-id="1">
+    <img src="ra.jpeg" alt="Red Arrows" height="30" />
+    Red Arrows (3) vs (5) Powder Dynamos
+    <img src="pd.png" alt="Powder Dynamos" height="30" /> -
+    <strong class="match-phase">First Half</strong>
+    <span class="live-sticker">LIVE</span>
+    <span class="timer">00:00</span>
+    <div class="controls">
+      <button onclick="startTimer(1)">Start</button>
+      <button onclick="pauseTimer(1)">Pause</button>
+      <button onclick="stopTimer(1)">Stop</button>
+      <button onclick="continueET(1)">Continue (ET)</button>
+    </div>
+  </div>
+
+  <div class="match-status" data-id="2">
+    <img src="n.png" alt="Nkana" height="30" />
+    Nkana (5) vs (4) Nakambala Leopards
+    <img src="nl.png" alt="Nakambala" height="30" /> -
+    <strong class="match-phase">First Half</strong>
+    <span class="live-sticker">LIVE</span>
+    <span class="timer">00:00</span>
+    <div class="controls">
+      <button onclick="startTimer(2)">Start</button>
+      <button onclick="pauseTimer(2)">Pause</button>
+      <button onclick="stopTimer(2)">Stop</button>
+      <button onclick="continueET(2)">Continue (ET)</button>
+    </div>
+  </div>
+</section>
+
+
+  <section class="upcoming-matches">
+    <h2>UPCOMING MATCHES</h2>
+<div class="match-status">
+  <img src="AL.jpeg" alt="ATHLETICO LUSAKA" height="30" />
+  ATHLETICO LUSAKA vs FOREST RANGERS
+  <img src="FR.jpeg" alt="FOREST RANGERS" height="30" /> -
+  Kickoff at 11:00
+</div>
+<div class="match-status">
+  <img src="N.png" alt="NKANA" height="30" />
+  NKANA V vs GREEN BUFFALOS
+  <img src="GB.jpg" alt="GREEN BUFFALOS" height="30" /> -
+  Kickoff at 15:00
+</div>
+<div class="match-status">
+  <img src="GE.png" alt="Team Z" height="30" />
+  GREEN EAGLES vs MUZA FC
+  <img src="M.jpg" alt="MUZA FC" height="30" /> -
+  Kickoff at 20:00
+</div>
+
+  </section>
+
+  <section class="match-results">
+<h2>MATCH-RESULTS</h2>
+    <div class="match-grid">
+      <div class="match-row">
+        <img src="MS.JPEG" alt="Team 1" />
+        <strong>MUTONDO STARS 2 - 1 LUMWANA RADIANTS</strong>
+        <img src="LR.JPEG" alt="Team 2" />
+      </div>
+      <div class="match-row">
+        <img src="M.JPG" alt="Team 3" />
+        <strong>MUZA FC 1 - 1 NKANA</strong>
+        <img src="N.png" alt="Team 4" />
+      </div>
+      <div class="match-row">
+        <img src="PD.png" alt="Team 5" />
+        <strong>POWER DYANMOS 3 - 0 GREEN EAGLES</strong>
+        <img src="GE.png" alt="Team 6" />
+      </div>
+    </div>
+  </section>
+
+ <!-- Top Performers Section -->
+<section id="top-performers" style="padding: 40px; background-color: #111; color: white;">
+  <h2 style="text-align: center; font-size: 2em; margin-bottom: 30px;">TOP 5 GOAL SCORERS | TOP 5 TOP ASSISTING PLAYERS </h2>
+
+  <div style="display: flex; justify-content: space-between; gap: 40px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;">
+
+    <!-- Top 5 Goal Scorers -->
+    <div style="flex: 1; min-width: 300px;">
+      <h3 style="text-align: center; margin-bottom: 20px;">Top 5 Goal Scorers</h3>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+
+        <!-- Scorer Row -->
+        <div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src="p1.WEBP" alt="IDRIS MBOMBO" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">Player 1</h4>
+            <p style="margin: 0;">10 Goals</p>
+          </div>
+          <img src="MS.JPEG" alt="Team 1" style="width: 40px; height: 40px;">
+        </div>
+
+        <!-- Repeat for other top 4 -->
+        <div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src="p4.WEBP" alt="SPENCER SAUTU" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">SPENCER SAUTU</h4>
+            <p style="margin: 0;">9 Goals</p>
+          </div>
+          <img src="AL.jpeg" alt="AL Team" style="width: 40px; height: 40px;">
+        </div>
+
+<div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src="p4.WEBP" alt="JAMES CHAMANGA" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">JAMES CHAMANGA</h4>
+            <p style="margin: 0;">9 Goals</p>
+          </div>
+          <img src="M.jpg" alt="AL Team" style="width: 40px; height: 40px;">
+        </div>
+
+<div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src="p4.WEBP" alt="LAZAROUZ KAMBOLE" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">LAZAROUZ KAMBOLE</h4>
+            <p style="margin: 0;">9 Goals</p>
+          </div>
+          <img src="LR.jpeg" alt="AL Team" style="width: 40px; height: 40px;">
+        </div>
+
+<div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src="p4.WEBP" alt="ALEX NG'ONGA" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">ALEX NG'ONGA</h4>
+            <p style="margin: 0;">9 Goals</p>
+          </div>
+          <img src="AL.jpeg" alt="AL Team" style="width: 40px; height: 40px;">
+        </div>
+
+
+        <!-- Add 3 more players similarly -->
+        <!-- ... -->
+
+      </div>
+    </div>
+
+    <!-- Top 5 Assist Providers -->
+    <div style="flex: 1; min-width: 300px;">
+      <h3 style="text-align: center; margin-bottom: 20px;">Top 5 Assist Providers</h3>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+
+        <!-- Assister Row -->
+        <div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src="AL.JPG" alt="Assist Player 1" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">PETER PHIRI</h4>
+            <p style="margin: 0;">8 Assists</p>
+          </div>
+          <img src="GE.png" alt="Club 1" style="width: 40px; height: 40px;">
+        </div>
+
+        <!-- Repeat for other top 4 -->
+        <div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src=".JPG" alt="Assist Player 2" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">CHRIS KATONGO JR</h4>
+            <p style="margin: 0;">7 Assists</p>
+          </div>
+          <img src="RA.JPEG" alt="Club 2" style="width: 40px; height: 40px;">
+        </div>
+<div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src=".JPG" alt="Assist Player 2" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">ALEX NG'ONGA</h4>
+            <p style="margin: 0;">7 Assists</p>
+          </div>
+          <img src="M.JPG" alt="Club 2" style="width: 40px; height: 40px;">
+        </div>
+
+<div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src="N.JPG" alt="Assist Player 2" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">JAMES CHAMANGA</h4>
+            <p style="margin: 0;">7 Assists</p>
+          </div>
+          <img src="N.png" alt="Club 2" style="width: 40px; height: 40px;">
+        </div>
+
+<div style="display: flex; align-items: center; background-color: #222; border-radius: 10px; padding: 10px;">
+          <img src="FR.JPG" alt="Assist Player 2" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div style="margin-left: 15px; flex-grow: 1;">
+            <h4 style="margin: 0;">PETER KABASO</h4>
+            <p style="margin: 0;">7 Assists</p>
+          </div>
+          <img src="LR.JPEG" alt="Club 2" style="width: 40px; height: 40px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<h2>Latest Transfer Market</h2>
+
+<!-- Filter Section -->
+<div id="transferFilters" style="text-align:center; margin-bottom: 15px;">
+  <label for="clubFilter">Filter by Club:</label>
+  <select id="clubFilter" onchange="filterTransfers()">
+    <option value="all">All Clubs</option>
+    <option value="Red Arrows">Red Arrows</option>
+    <option value="ZESCO United">ZESCO United</option>
+    <option value="Nkana">Nkana</option>
+    <option value="Power Dynamos">Power Dynamos</option>
+<option value="Power Dynamos">Power Dynamos</option>
+<option value="Power Dynamos">Power Dynamos</option>
+<option value="Power Dynamos">Power Dynamos</option>
+<option value="Power Dynamos">Power Dynamos</option>
+<option value="ATHLETICO LUSAKA">ATHLETICO LUSAKA</option>
+<option value="NKANA FC">NKANA FC</option>
+<option value="POWER DYNAMOS FC">POWER DYNAMOS FC</option>
+<option value="MUZA FC">MUZA FC</option>
+<option value="NKWAZI FC">NKWAZI FC</option>
+<option value="GREEN BUFFALOS">GREEN BUFFALOS</option>
+<option value="GREEN EAGLES FC">GREEN EAGLES FC</option>
+<option value="MUTONDO STARS">MUTONDO STARS</option>
+<option value="LUMWANA RADIANTS FC">LUMWANA RADIANTS FC</option>
+<option value="RED ARROWS FC">RED ARROWS FC</option>
+    <!-- Add more clubs as needed -->
+  </select>
+</div>
+
+<table id="transferMarket" style="color: black;">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Photo</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Position</th>
+      <th>Type</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Sample Row -->
+    <tr data-from="Red Arrows" data-to="ZESCO United">
+      <td>John Banda</td>
+      <td><img src="images/players/john_banda.jpg" alt="John Banda" class="player-img"></td>
+      <td><img src="images/logos/red_arrows.png" alt="Red Arrows" class="club-logo"> Red Arrows</td>
+      <td><img src="images/logos/zesco_united.png" alt="ZESCO United" class="club-logo"> ZESCO United</td>
+      <td>Midfielder</td>
+      <td>Permanent</td>
+      <td>2025-05-10</td>
+    </tr>
+    <tr data-from="Nkana" data-to="Power Dynamos">
+      <td>David Phiri</td>
+      <td><img src="images/players/david_phiri.jpg" alt="David Phiri" class="player-img"></td>
+      <td><img src="images/logos/nkana.png" alt="Nkana" class="club-logo"> Nkana</td>
+      <td><img src="images/logos/power_dynamos.png" alt="Power Dynamos" class="club-logo"> Power Dynamos</td>
+      <td>Defender</td>
+      <td>Loan</td>
+      <td>2025-05-12</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+
+ <script>
+  const ADMIN_CODE = "0067";
+  let accessLevel = "none"; // "admin", "user", or "none"
+
+  // Prompt user for access
+  function requestAccess() {
+    const userChoice = prompt("Enter 'user' to view or access code for admin:");
+    if (userChoice === "user") {
+      accessLevel = "user";
+      alert("View-only access granted.");
+    } else if (userChoice === ADMIN_CODE) {
+      accessLevel = "admin";
+      alert("Admin access granted.");
+    } else {
+      alert("Access denied. No controls allowed.");
+    }
+  }
+
+  // Prompt on load
+  requestAccess();
+
+  const matchTimers = [
+    { time: 0, interval: null, isET: false, phase: "First Half" },
+    { time: 0, interval: null, isET: false, phase: "First Half" },
+    { time: 0, interval: null, isET: false, phase: "First Half" },
+  ];
+
+  function formatTime(seconds) {
+    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const s = String(seconds % 60).padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  function updateDisplay(index) {
+    const timer = document.querySelectorAll('.timer')[index];
+    const phase = document.querySelectorAll('.match-phase')[index];
+    const match = matchTimers[index];
+
+    timer.textContent = formatTime(match.time);
+
+    const mins = match.time / 60;
+
+    if (!match.isET) {
+      if (mins >= 0 && mins < 45) match.phase = "First Half";
+      else if (mins >= 45 && mins < 90) match.phase = "Second Half";
+      else match.phase = "Full Time";
+    } else {
+      if (mins < 15) match.phase = "Extra Time 1st Half";
+      else if (mins < 30) match.phase = "Extra Time 2nd Half";
+      else match.phase = "Penalty Shootout";
+    }
+
+    phase.textContent = match.phase;
+  }
+
+  function startTimer(index) {
+    if (accessLevel !== "admin") return;
+    const match = matchTimers[index];
+    if (match.interval) return;
+
+    match.interval = setInterval(() => {
+      match.time += 1;
+      updateDisplay(index);
+    }, 1000);
+  }
+
+  function pauseTimer(index) {
+    if (accessLevel !== "admin") return;
+    clearInterval(matchTimers[index].interval);
+    matchTimers[index].interval = null;
+  }
+
+  function stopTimer(index) {
+    if (accessLevel !== "admin") return;
+    const match = matchTimers[index];
+    clearInterval(match.interval);
+    match.interval = null;
+
+    if (!match.isET && match.time >= 5400) {
+      match.phase = "Full Time";
+    }
+    updateDisplay(index);
+  }
+
+  function continueET(index) {
+    if (accessLevel !== "admin") return;
+    const match = matchTimers[index];
+    match.isET = true;
+    match.time = 0;
+    clearInterval(match.interval);
+    match.interval = null;
+    updateDisplay(index);
+  }
+</script><style>
+  .team-table {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .team-table th, .team-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .team-table th {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .team-table img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+  .gain {
+    color: green;
+    font-weight: bold;
+  }
+
+  .loss {
+    color: red;
+    font-weight: bold;
+  }
+
+  .section-title {
+    text-align: center;
+    margin: 30px 0 10px;
+    font-size: 1.4em;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 6px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<script>
+  const headlines = [
+    {
+      text: "ZESCO United sign Ghanaian striker ahead of title race.",
+      img: "images/zesco_striker.jpg"
+    },
+    {
+      text: "Green Buffaloes unveil new head coach.",
+      img: "images/green_buffaloes_coach.jpg"
+    },
+    {
+      text: "Zanaco FC announces youth development program.",
+      img: "images/zanaco_youth.jpg"
+    },
+    {
+      text: "NAPSA Stars appoint new technical director.",
+      img: "images/napsa_director.jpg"
+    },
+    {
+      text: "Nkana FC confirms departure of two key players.",
+      img: "images/nkana_departure.jpg"
+    },
+    {
+      text: "FAZ confirms kickoff dates for 2025 season.",
+      img: "images/faz_kickoff.jpg"
+    }
+  ];
+
+  let currentHeadline = 0;
+
+  function showHeadline(index) {
+    const headline = headlines[index];
+    document.getElementById("headlineImage").src = headline.img;
+    document.getElementById("headlineText").textContent = headline.text;
+  }
+
+  function nextHeadline() {
+    currentHeadline = (currentHeadline + 1) % headlines.length;
+    showHeadline(currentHeadline);
+  }
+
+  function prevHeadline() {
+    currentHeadline = (currentHeadline - 1 + headlines.length) % headlines.length;
+    showHeadline(currentHeadline);
+  }
+
+  // Initialize first headline
+  window.onload = () => showHeadline(currentHeadline);
+</script>
+
+
+<script>
+  let matchTimers = {};
+  const matchPhases = [
+    { name: "First Half", duration: 45 * 60 },
+    { name: "Second Half", duration: 45 * 60 },
+    { name: "Extra Time 1", duration: 15 * 60 },
+    { name: "Extra Time 2", duration: 15 * 60 },
+  ];
+
+  function formatTime(seconds) {
+    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const s = String(seconds % 60).padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  function startTimer(id) {
+    const match = matchTimers[id] || {
+      currentPhase: 0,
+      elapsed: 0,
+      interval: null
+    };
+
+    if (match.interval) return; // Already running
+
+    match.interval = setInterval(() => {
+      match.elapsed++;
+      const currentPhaseObj = matchPhases[match.currentPhase];
+      const timerEl = document.querySelector(`.match-status[data-id="${id}"] .timer`);
+      const phaseEl = document.querySelector(`.match-status[data-id="${id}"] .match-phase`);
+      
+      timerEl.textContent = formatTime(match.elapsed);
+      phaseEl.textContent = currentPhaseObj.name;
+
+      if (match.elapsed >= currentPhaseObj.duration) {
+        clearInterval(match.interval);
+        match.interval = null;
+        match.currentPhase++;
+
+        if (match.currentPhase < matchPhases.length) {
+          match.elapsed = 0;
+          startTimer(id); // Auto continue to next phase
+        } else {
+          phaseEl.textContent = "Match Ended";
+        }
+      }
+    }, 1000);
+
+    matchTimers[id] = match;
+  }
+
+  function pauseTimer(id) {
+    const match = matchTimers[id];
+    if (match && match.interval) {
+      clearInterval(match.interval);
+      match.interval = null;
+    }
+  }
+
+  function stopTimer(id) {
+    const match = matchTimers[id];
+    if (match) {
+      clearInterval(match.interval);
+      match.interval = null;
+      match.elapsed = 0;
+      match.currentPhase = 0;
+      const timerEl = document.querySelector(`.match-status[data-id="${id}"] .timer`);
+      const phaseEl = document.querySelector(`.match-status[data-id="${id}"] .match-phase`);
+      timerEl.textContent = "00:00";
+      phaseEl.textContent = "Not Started";
+    }
+  }
+
+  function continueET(id) {
+    const match = matchTimers[id];
+    if (match && match.currentPhase < 2) {
+      match.currentPhase = 2;
+      match.elapsed = 0;
+      startTimer(id);
+    }
+  }
+</script>
+
+<h2>Top 5 Teams</h2>
+<table id="topTeams">
+  <thead>
+    <tr>
+      <th>#</th><th>Team</th><th>PL</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<h2>Bottom 4 Teams</h2>
+<table id="bottomTeams">
+  <thead>
+    <tr>
+      <th>#</th><th>Team</th><th>PL</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  function calculateDerived(team) {
+    team.gd = team.gf - team.ga;
+    team.pts = (team.w * 3) + (team.d * 1);
+    return team;
+  }
+
+  function loadTableSummary() {
+    let teams = JSON.parse(localStorage.getItem('teams'));
+    if (!teams) return;
+
+    teams.forEach(calculateDerived);
+    teams.sort((a, b) => b.pts - a.pts || b.gd - a.gd);
+
+    const top5 = teams.slice(0, 5);
+    const bottom4 = teams.slice(-4);
+
+    populateTable('topTeams', top5);
+    populateTable('bottomTeams', bottom4);
+  }
+
+  function populateTable(tableId, teamList) {
+    const tbody = document.getElementById(tableId).querySelector('tbody');
+    tbody.innerHTML = '';
+
+    teamList.forEach((team, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td><img src="${team.logo}" style="width: 20px; vertical-align: middle;"> ${team.name}</td>
+        <td>${team.pl}</td><td>${team.w}</td><td>${team.d}</td><td>${team.l}</td>
+        <td>${team.gf}</td><td>${team.ga}</td><td>${team.gd}</td><td>${team.pts}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  window.onload = loadTableSummary;
+</script>
+
+<script>
+function filterTransfers() {
+  const filter = document.getElementById("clubFilter").value;
+  const rows = document.querySelectorAll("#transferMarket tbody tr");
+  rows.forEach(row => {
+    const from = row.getAttribute("data-from");
+    const to = row.getAttribute("data-to");
+    if (filter === "all" || from === filter || to === filter) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+}
+</script>
+  <footer class="news-ticker">
+    <div class="ticker-content">
+      © 2025 Zambian Premier League - Powered by Sande Tech Solutions
+    </div>
+  </footer>
+</body>
+
+</html>

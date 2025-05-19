@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zambian Premier League Dashboard</title>
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: white;
+  text-align: center;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  background: url('logo.png') no-repeat center center;
+  background-size: 400px;
+  opacity: 0.05;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+    header img {
+      width: 120px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    .ticker {
+      background: black;
+      color: white;
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      animation: scroll 20s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    section {
+      margin: 40px auto;
+      max-width: 1200px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+    }
+
+    .news-item {
+      margin-bottom: 20px;
+    }
+
+    .news-item img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+     .live-match {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .match-card {
+      background: #eaf1f8;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .club-logo {
+      height: 20px;
+      vertical-align: middle;
+      margin: 0 5px;
+    }
+
+    .status {
+      font-weight: bold;
+      color: red;
+    }
+
+    .time {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .current-datetime {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 15px;
+      font-size: 18px;
+      color: #222;
+    }
+    .top-section {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .top-list {
+      width: 48%;
+    }
+
+    .top-player {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      gap: 10px;
+    }
+
+    .top-player img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .transfer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .transfer img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    .arrow {
+      font-size: 24px;
+      color: green;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+  </style>
+</head>
+<body>
+<!-- Dropdown Menu at Top-Left Corner -->
+<div style="position: fixed; top: 10px; left: 10px; z-index: 1000;">
+  <select onchange="location = this.value;">
+    <option selected disabled>Navigate</option>
+    <option value="ZPL_TABLE.html">Premier League Table</option>
+    <option value="LIVEMATCHES.html">Live Matches</option>
+    <option value="LAT">League and Tournaments</option>
+    <option value="TRANSFERS.html">Transfers</option>
+    <option value="#about">About Section</option>
+  </select>
+</div>
+
+<header>
+  <img src="zpl.jpg" alt="Zambian Premier League Logo" />
+</header>
+
+<div class="ticker">
+  <div class="ticker-text">
+    Breaking News: Zesco United signs new midfielder | Nkana FC announces coach departure | Red Arrows dominate week 10 | Power Dynamos edge Forest Rangers 2-1 | ...
+  </div>
+</div>
+
+<section>
+  <h2>
+    <a href="#news" style="text-decoration: none; color: inherit;">NEWS HEADLINES</a>
+  </h2>
+  <div class="news-item">
+    <img src="headline1.jpg" alt="Headline 1" />
+    <p>ZESCO United signs rising star midfielder from Kabwe Warriors</p>
+  </div>
+  <div class="news-item">
+    <img src="headline2.jpg" alt="Headline 2" />
+    <p>Red Arrows maintain unbeaten streak in the league</p>
+  </div>
+</section>
+
+
+<section>
+  <h2>
+    <a href="#news" style="text-decoration: none; color: inherit;">LIVE MATCHES</a>
+  </h2>
+
+  <div class="current-datetime" id="currentDateTime">Loading date and time...</div>
+
+  <div class="live-match">
+    <!-- Match 1 -->
+    <div class="match-card" id="match1">
+      <div><img src="ZE.png" class="club-logo" /> ZESCO 2 - 1 <img src="N.png" class="club-logo" /> Nkana</div>
+      <div class="status" id="match1-status">LIVE</div>
+      <div class="time" id="match1-time">00:00</div>
+      <div>Scorers: Mwepu 12', Sakala 34' | Kalaba 45'</div>
+    </div>
+
+    <!-- Match 2 -->
+    <div class="match-card" id="match2">
+      <div><img src="RA.jpeg" class="club-logo" /> Red Arrows vs Power Dynamos <img src="PD.png" class="club-logo" /></div>
+      <div class="status" id="match2-status" style="color: orange;">Upcoming</div>
+      <div class="time" id="match2-time">Kickoff: 16:00</div>
+      <div>Match starts soon</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>
+    <a href="#news" style="text-decoration: none; color: inherit;">TOP GOAL SCORERS AND ASSITING PLAYERS</a>
+  </h2>
+  <div class="top-section">
+    
+    <!-- Top Scorers Column -->
+    <div class="top-list">
+      <h3>Top Scorers</h3>
+
+      <div class="top-player">
+        <img src="player1.jpg" class="player-img" />
+        <img src="zesco-logo.png" class="club-logo" />
+        <div>Mwepu – ZESCO <br />Goals: 9</div>
+      </div>
+
+      <div class="top-player">
+        <img src="player2.jpg" class="player-img" />
+        <img src="arrows-logo.png" class="club-logo" />
+        <div>Sakala – Arrows <br />Goals: 8</div>
+      </div>
+    </div>
+
+    <!-- Top Assists Column -->
+    <div class="top-list">
+      <h3>Top Assists</h3>
+
+      <div class="top-player">
+        <img src="player3.jpg" class="player-img" />
+        <img src="nkana-logo.png" class="club-logo" />
+        <div>Kalaba – Nkana <br />Assists: 7</div>
+      </div>
+
+      <div class="top-player">
+        <img src="player4.jpg" class="player-img" />
+        <img src="dynamos-logo.png" class="club-logo" />
+        <div>Mutale – Dynamos <br />Assists: 6</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <h2>
+    <a href="#news" style="text-decoration: none; color: inherit;">ZPL TRANSFER MARKET</a>
+  </h2>
+  <div class="transfer">
+    <img src="player5.jpg" alt="Player" />
+    <img src="kabwe.png" title="Kabwe Warriors" />
+    <div class="arrow">➡️</div>
+    <img src="zesco.png" title="ZESCO United" />
+    <div>12 May 2025</div>
+  </div>
+  <div class="transfer">
+    <img src="player6.jpg" alt="Player" />
+    <img src="dynamos.png" title="Dynamos" />
+    <div class="arrow">➡️</div>
+    <img src="arrows.png" title="Red Arrows" />
+    <div>19 May 2025</div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Sande Tech Solutions. All Rights Reserved.
+</footer>
+
+<script>
+  let startTime = new Date().getTime();
+
+  function updateMatchTime() {
+    const now = new Date().getTime();
+    const elapsed = Math.floor((now - startTime) / 1000);
+    const minutes = Math.floor(elapsed / 60);
+    const seconds = elapsed % 60;
+    const displayTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    const status = minutes < 45 ? "First Half" :
+                   minutes < 90 ? "Second Half" : "Full Time";
+
+    document.getElementById("match1-time").innerHTML = `${displayTime} (${status})`;
+  }
+
+  setInterval(updateMatchTime, 1000);
+</script>
+<script>
+  const match1Start = new Date(); // Adjust match times as needed
+  match1Start.setHours(15, 0, 0); // Match 1 starts at 15:00
+  const match1End = new Date(match1Start.getTime() + 90 * 60000);
+
+  const match2Start = new Date();
+  match2Start.setHours(16, 0, 0);
+  const match2End = new Date(match2Start.getTime() + 90 * 60000);
+
+  function formatMatchTime(elapsedMs) {
+    const minutes = Math.floor(elapsedMs / 60000);
+    if (minutes <= 45) return `1st Half: ${minutes}′`;
+    if (minutes <= 90) return `2nd Half: ${minutes}′`;
+    return 'FT';
+  }
+
+  function updateTime() {
+    const now = new Date();
+    document.getElementById("currentDateTime").textContent = now.toLocaleString();
+
+    // MATCH 1
+    const m1status = document.getElementById("match1-status");
+    const m1time = document.getElementById("match1-time");
+
+    if (now >= match1Start && now < match1End) {
+      m1status.textContent = "LIVE";
+      m1status.style.color = "red";
+      const elapsed = now - match1Start;
+      m1time.textContent = formatMatchTime(elapsed);
+    } else if (now >= match1End) {
+      m1status.textContent = "Finished";
+      m1status.style.color = "gray";
+      m1time.textContent = "FT";
+    } else {
+      m1status.textContent = "Upcoming";
+      m1status.style.color = "orange";
+      m1time.textContent = `Kickoff: ${match1Start.getHours()}:00`;
+    }
+
+    // MATCH 2
+    const m2status = document.getElementById("match2-status");
+    const m2time = document.getElementById("match2-time");
+
+    if (now >= match2Start && now < match2End) {
+      m2status.textContent = "LIVE";
+      m2status.style.color = "red";
+      const elapsed = now - match2Start;
+      m2time.textContent = formatMatchTime(elapsed);
+    } else if (now >= match2End) {
+      m2status.textContent = "Finished";
+      m2status.style.color = "gray";
+      m2time.textContent = "FT";
+    } else {
+      m2status.textContent = "Upcoming";
+      m2status.style.color = "orange";
+      m2time.textContent = `Kickoff: ${match2Start.getHours()}:00`;
+    }
+  }
+
+  setInterval(updateTime, 1000);
+  updateTime();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,418 @@
+v<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZPL Transfers – 5x5 Grid</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: white;
+      position: relative;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    body::before {
+      content: "";
+      background: url('zpl.jpg') no-repeat center center;
+      background-size: 60vmin;
+      opacity: 0.05;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60vmin;
+      height: 60vmin;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #222;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .transfer-card {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .player-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .club-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .club-logos img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .player-name {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .transfer-details {
+      color: #555;
+    }
+
+    .sticker {
+      width: 0;
+      height: 0;
+      border-top: 40px solid green;
+      border-left: 40px solid transparent;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 3;
+    }
+
+    .sticker::after {
+      content: "NEW";
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      position: absolute;
+      top: -30px;
+      right: -12px;
+      transform: rotate(45deg);
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      z-index: 2;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+.site-logo {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto; /* center align and add space below */
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="zpl.jpg" alt="ZPL Logo" class="site-logo" />
+  <h1>Zambia Premier League Transfers</h1>
+</header>
+
+
+  <div class="grid-container">
+    <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player1.jpg" alt="John Zulu" class="player-img" />
+      <div class="player-name">John Zulu</div>
+      <div class="transfer-details">Nkana FC → ZESCO United</div>
+      <div class="club-logos">
+        <img src="nkana.png" alt="Nkana FC">
+        <img src="zesco.png" alt="ZESCO United">
+      </div>
+    </div>
+
+    <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player2.jpg" alt="Peter Mwansa" class="player-img" />
+      <div class="player-name">Peter Mwansa</div>
+      <div class="transfer-details">Green Eagles → Red Arrows</div>
+      <div class="club-logos">
+        <img src="eagles.png" alt="Green Eagles">
+        <img src="arrows.png" alt="Red Arrows">
+      </div>
+    </div>
+   <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player1.jpg" alt="John Zulu" class="player-img" />
+      <div class="player-name">John Zulu</div>
+      <div class="transfer-details">Nkana FC → ZESCO United</div>
+      <div class="club-logos">
+        <img src="nkana.png" alt="Nkana FC">
+        <img src="zesco.png" alt="ZESCO United">
+      </div>
+    </div>
+
+    <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player2.jpg" alt="Peter Mwansa" class="player-img" />
+      <div class="player-name">Peter Mwansa</div>
+      <div class="transfer-details">Green Eagles → Red Arrows</div>
+      <div class="club-logos">
+        <img src="eagles.png" alt="Green Eagles">
+        <img src="arrows.png" alt="Red Arrows">
+      </div>
+    </div>
+   <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player1.jpg" alt="John Zulu" class="player-img" />
+      <div class="player-name">John Zulu</div>
+      <div class="transfer-details">Nkana FC → ZESCO United</div>
+      <div class="club-logos">
+        <img src="nkana.png" alt="Nkana FC">
+        <img src="zesco.png" alt="ZESCO United">
+      </div>
+    </div>
+
+    <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player2.jpg" alt="Peter Mwansa" class="player-img" />
+      <div class="player-name">Peter Mwansa</div>
+      <div class="transfer-details">Green Eagles → Red Arrows</div>
+      <div class="club-logos">
+        <img src="eagles.png" alt="Green Eagles">
+        <img src="arrows.png" alt="Red Arrows">
+      </div>
+    </div>
+   <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player1.jpg" alt="John Zulu" class="player-img" />
+      <div class="player-name">John Zulu</div>
+      <div class="transfer-details">Nkana FC → ZESCO United</div>
+      <div class="club-logos">
+        <img src="nkana.png" alt="Nkana FC">
+        <img src="zesco.png" alt="ZESCO United">
+      </div>
+    </div>
+
+    <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player2.jpg" alt="Peter Mwansa" class="player-img" />
+      <div class="player-name">Peter Mwansa</div>
+      <div class="transfer-details">Green Eagles → Red Arrows</div>
+      <div class="club-logos">
+        <img src="eagles.png" alt="Green Eagles">
+        <img src="arrows.png" alt="Red Arrows">
+      </div>
+    </div>
+   <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player1.jpg" alt="John Zulu" class="player-img" />
+      <div class="player-name">John Zulu</div>
+      <div class="transfer-details">Nkana FC → ZESCO United</div>
+      <div class="club-logos">
+        <img src="nkana.png" alt="Nkana FC">
+        <img src="zesco.png" alt="ZESCO United">
+      </div>
+    </div>
+
+    <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player2.jpg" alt="Peter Mwansa" class="player-img" />
+      <div class="player-name">Peter Mwansa</div>
+      <div class="transfer-details">Green Eagles → Red Arrows</div>
+      <div class="club-logos">
+        <img src="eagles.png" alt="Green Eagles">
+        <img src="arrows.png" alt="Red Arrows">
+      </div>
+    </div>
+   <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player1.jpg" alt="John Zulu" class="player-img" />
+      <div class="player-name">John Zulu</div>
+      <div class="transfer-details">Nkana FC → ZESCO United</div>
+      <div class="club-logos">
+        <img src="nkana.png" alt="Nkana FC">
+        <img src="zesco.png" alt="ZESCO United">
+      </div>
+    </div>
+
+    <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player2.jpg" alt="Peter Mwansa" class="player-img" />
+      <div class="player-name">Peter Mwansa</div>
+      <div class="transfer-details">Green Eagles → Red Arrows</div>
+      <div class="club-logos">
+        <img src="eagles.png" alt="Green Eagles">
+        <img src="arrows.png" alt="Red Arrows">
+      </div>
+    </div>
+   <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player1.jpg" alt="John Zulu" class="player-img" />
+      <div class="player-name">John Zulu</div>
+      <div class="transfer-details">Nkana FC → ZESCO United</div>
+      <div class="club-logos">
+        <img src="nkana.png" alt="Nkana FC">
+        <img src="zesco.png" alt="ZESCO United">
+      </div>
+    </div>
+
+    <div class="transfer-card">
+      <div class="sticker"></div>
+      <img src="player2.jpg" alt="Peter Mwansa" class="player-img" />
+      <div class="player-name">Peter Mwansa</div>
+      <div class="transfer-details">Green Eagles → Red Arrows</div>
+      <div class="club-logos">
+        <img src="eagles.png" alt="Green Eagles">
+        <img src="arrows.png" alt="Red Arrows">
+      </div>
+    </div>
+
+    <!-- Repeat for other filled cards... -->
+
+    <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+ <!-- Empty slot template -->
+    <div class="transfer-card">
+      <img src="default.jpg" alt="Available" class="player-img" />
+      <div class="player-name">-</div>
+      <div class="transfer-details">Available Slot</div>
+      <div class="club-logos">
+        <img src="default-club.png" alt="">
+        <img src="default-club.png" alt="">
+      </div>
+    </div>
+
+    <!-- Repeat empty slot cards to make 25 total -->
+    <!-- ... add up to 25 total cards here as needed ... -->
+  </div>
+
+  <footer>
+    &copy; 2025 Sande Tech Solutions — Zambia Premier League Transfers
+  </footer>
+
+</body>
+</html>

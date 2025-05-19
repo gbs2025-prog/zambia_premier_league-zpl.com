@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zambian Live Matches</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #111;
+      color: #f0f0f0;
+      padding: 20px;
+      border: 10px solid transparent;
+      background-image:
+        linear-gradient(white, white),
+        linear-gradient(to right, green, red, orange, black);
+      background-origin: padding-box, border-box;
+      background-clip: padding-box, border-box;
+      background-repeat: no-repeat;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Watermark Style */
+    body::before {
+      content: "";
+      background: url('zpl.jpg') no-repeat center center;
+      background-size: contain;
+      opacity: 0.15;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .top-logo-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .logo-box {
+      background: linear-gradient(135deg, green, orange, red);
+      padding: 10px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .logo {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.3));
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ff88;
+      font-weight: bold;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .live-matches-section {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .match-card {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      border: 4px solid;
+      border-image: linear-gradient(to right, green, red, orange, black) 1;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,255,128,0.1);
+    }
+
+    .match-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .team {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .team img {
+      height: 30px;
+      width: auto;
+    }
+
+    .score {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0 10px;
+      color: #ffffff;
+    }
+
+    .match-info {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .live-sticker {
+      background: red;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      animation: blink 1s infinite;
+    }
+
+    .timer {
+      font-weight: bold;
+      color: #00ff88;
+    }
+
+    .match-phase {
+      font-weight: bold;
+      color: orange;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0.5; }
+    }
+
+    .events {
+      margin-top: 8px;
+      font-size: 13px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .match-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logos -->
+  <div class="top-logo-wrapper">
+    <div class="logo-box">
+      <img src="zpl.jpg" class="logo" alt="Logo 1">
+      <img src="faz.png" class="logo" alt="Logo 2">
+    </div>
+  </div>
+
+  <h1>LIVE MATCHES & RESULTS</h1>
+<h1>SEASON 2024/25 WEEK 34 17 MAY, 2025</h1>
+  <!-- Match Cards -->
+  <section class="live-matches-section">
+
+    <div class="match-card" data-kickoff="2025-05-17T15:00:00">
+      <div class="match-header">
+        <div class="team"><img src="GE.png">Green Eagles</div>
+        <div class="score">(1) vs (0)</div>
+        <div class="team"><img src="M.jpg">FC Muza</div>
+      </div>
+      <div class="match-info">
+        <div class="live-sticker" style="display:none;">LIVE</div>
+        <div class="timer">00:00</div>
+        <div class="match-phase">Upcoming</div>
+      </div>
+      <div class="events">
+        <span>⚽ Scorers: (Green Eagles) Aaron Musore 6'</span>
+      </div>
+    </div>
+
+    <div class="match-card" data-kickoff="2025-05-17T23:06:00">
+      <div class="match-header">
+        <div class="team"><img src="I.jpeg">Indeni FC</div>
+        <div class="score">(1) vs (3)</div>
+        <div class="team">Forest Rangers<img src="FR.jpeg"></div>
+      </div>
+      <div class="match-info">
+        <div class="live-sticker" style="display:none;">LIVE</div>
+        <div class="timer">00:00</div>
+        <div class="match-phase">Upcoming</div>
+      </div>
+      <div class="events">
+        <span>⚽ Scorers: (INDENI) Logic Ching'andu 37' (Penalty)</span>
+    </div>
+<div class="events">
+        <span>⚽ Scorers: (FOREST RANGERS) Tiki Chiluba 6', Hope Katwishi 21' & Chris Mugala 77' </span>
+    </div>
+</div>
+
+    <div class="match-card" data-kickoff="2025-05-17T17:00:00">
+      <div class="match-header">
+        <div class="team"><img src="MW.png">Mufurila Wanderers</div>
+        <div class="score">(1) vs (2)</div>
+        <div class="team">Green Buffalos<img src="GB.jpg"></div>
+      </div>
+      <div class="match-info">
+        <div class="live-sticker" style="display:none;">LIVE</div>
+        <div class="timer">00:00</div>
+        <div class="match-phase">Upcoming</div>
+      </div>
+      <div class="events">
+  <span>⚽ Scorers: (Green Buffalos) Chilimba Moonga 45'+ &  Bornwell Mwape 53' </span>
+ </div>
+<div class="events">
+        <span>⚽ Scorers: (Mufurila Wanderers) Samuel Chiposa 61' </span>
+      </div>
+    </div>
+
+ <div class="match-card" data-kickoff="2025-05-17T15:00:00">
+      <div class="match-header">
+        <div class="team"><img src="NS.jpeg">Napsa Stars</div>
+        <div class="score">(0) vs (0)</div>
+        <div class="team">Mutondo Stars<img src="MS.jpeg"></div>
+      </div>
+      <div class="match-info">
+        <div class="live-sticker" style="display:none;">LIVE</div>
+        <div class="timer">00:00</div>
+        <div class="match-phase">Upcoming</div>
+      </div>
+      <div class="events">
+        <span>⚽ Scorers: </span>
+<span> Match Status: Draw </span>
+      </div>
+    </div>
+
+    <div class="match-card" data-kickoff="2025-05-16T23:06:00">
+      <div class="match-header">
+        <div class="team"><img src="NR.jpeg"> Nchanga Rangers</div>
+        <div class="score">(1) vs (1)</div>
+        <div class="team">Powder Dynamos <img src="PD.png"></div>
+      </div>
+      <div class="match-info">
+        <div class="live-sticker" style="display:none;">LIVE</div>
+        <div class="timer">00:00</div>
+        <div class="match-phase">Upcoming</div>
+      </div>
+      <div class="events">
+        <span>⚽ Scorers: (NCHANGA RANGERS) Lukeza Ange Sama 10'</span>
+      </div>
+<div class="events">
+        <span>⚽ Scorers:(POWER DYANMOS) Titus Chansa 17'</span>
+      </div>
+<div class="events">
+       <span> Match Status: Draw </span>
+      </div>
+    </div>
+
+  <div class="match-card" data-kickoff="2025-05-16T17:00:00">
+      <div class="match-header">
+        <div class="team"><img src="N.png"> Nkana FC</div>
+        <div class="score">(2) vs (0)</div>
+        <div class="team">Kabwe Warriors <img src="KW.jpg"></div>
+      </div>
+      <div class="match-info">
+        <div class="live-sticker" style="display:none;">LIVE</div>
+        <div class="timer">00:00</div>
+        <div class="match-phase">Upcoming</div>
+      </div>
+      <div class="events">
+        <span>⚽ Scorers: (NKANA FC) Idris Mbombo 65', Charles Zulu 69' </span>
+      </div>
+    </div>
+
+ <div class="match-card" data-kickoff="2025-05-16T15:00:00">
+      <div class="match-header">
+        <div class="team"><img src="RA.jpeg"> Red Arrows</div>
+        <div class="score">(1) vs (0)</div>
+        <div class="team">Zanaco FC<img src="ZA.png"></div>
+      </div>
+      <div class="match-info">
+        <div class="live-sticker" style="display:none;">LIVE</div>
+        <div class="timer">00:00</div>
+        <div class="match-phase">Upcoming</div>
+      </div>
+      <div class="events">
+        <span>⚽ Scorers: (RED ARROWS) Angel Lubamba 51'</span>
+      </div>
+    </div>
+
+    <div class="match-card" data-kickoff="2025-05-16T17:00:00">
+      <div class="match-header">
+        <div class="team"><img src="ZE.png"> Zesco United</div>
+        <div class="score">(3) vs (2)</div>
+        <div class="team">Athletico Lusaka <img src="AL.jpeg"></div>
+      </div>
+      <div class="match-info">
+        <div class="live-sticker" style="display:none;">LIVE</div>
+        <div class="timer">00:00</div>
+        <div class="match-phase">Upcoming</div>
+      </div>
+      <div class="events">
+        <span>⚽ Scorers: (ZESCO UNITED) Alex Ng'onga 11', 73' & George Ngoma 80'</span>
+      </div>
+<div class="events">
+        <span>⚽ Scorers: (ATHLETICO LUSAKA) Benjamin Chisala 1' & Julius Kumwenda 40'</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const MATCH_DURATION = 90 * 60;
+
+    function formatTime(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = seconds % 60;
+      return `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+    }
+
+    function updateTimers() {
+      const cards = document.querySelectorAll('.match-card');
+      const now = new Date();
+
+      cards.forEach(card => {
+        const kickoff = new Date(card.dataset.kickoff);
+        const elapsed = Math.floor((now - kickoff) / 1000);
+
+        const timer = card.querySelector('.timer');
+        const sticker = card.querySelector('.live-sticker');
+        const phase = card.querySelector('.match-phase');
+
+        if (elapsed < 0) {
+          timer.textContent = '00:00';
+          sticker.style.display = 'none';
+          phase.textContent = 'Upcoming';
+        } else if (elapsed <= MATCH_DURATION) {
+          timer.textContent = formatTime(elapsed);
+          sticker.style.display = 'inline-block';
+          phase.textContent = elapsed < 45 * 60 ? 'First Half' : 'Second Half';
+        } else {
+          timer.textContent = '90:00';
+          sticker.style.display = 'none';
+          phase.textContent = 'Full Time';
+        }
+      });
+    }
+
+    updateTimers();
+    setInterval(updateTimers, 1000);
+  </script>
+
+</body>
+</html>

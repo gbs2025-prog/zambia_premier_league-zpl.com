@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZPL Charity Shield</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffffff;
+      color: #222;
+    }
+
+    /* Ticker */
+    .news-ticker {
+      background: lightblue;
+      color: #000;
+      padding: 12px;
+      font-weight: bold;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: scroll-left 20s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 10px;
+      border-bottom: 2px solid #eee;
+    }
+
+    .center-logos img {
+      width: 80px;
+      margin: 0 15px;
+    }
+
+    .country-flags img {
+      width: 45px;
+      margin: 0 8px;
+    }
+
+    /* DateTime */
+    #currentDateTime {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 10px 0 20px;
+    }
+
+    /* Club Grid */
+    .club-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* exactly 7 columns */
+  grid-template-rows: repeat(7, auto);   /* exactly 7 rows */
+  gap: 15px;
+  padding: 10px 30px;
+  justify-items: center;
+}
+    .club-grid img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #f5f5f5;
+      padding: 5px;
+    }
+
+    /* Live Matches */
+    .live-matches {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .matches-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .match-card {
+      flex: 1 1 280px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .match-card img {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+    }
+
+    .match-info {
+      margin: 10px 0;
+    }
+
+    .live-label {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      border-radius: 5px;
+    }
+
+    /* Footer */
+    .footer {
+      background: lightblue;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+.headline-news {
+  padding: 30px;
+  background-color: #ffffff;
+  color: #333;
+  text-align: center;
+}
+
+.headline-news h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.news-slider-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.news-slider {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: max-content;
+}
+
+.news-item {
+  min-width: 300px;
+  max-width: 300px;
+  margin-right: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.news-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.news-item p {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.news-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.news-nav.prev {
+  left: 10px;
+}
+
+.news-nav.next {
+  right: 10px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- News Ticker -->
+  <div class="news-ticker">Breaking: ZPL Charity Shield kicks off with electrifying matches – Stay tuned for live scores and updates!</div>
+
+  <!-- Header Section -->
+  <header>
+    <!-- Center Logos -->
+    <div class="center-logos">
+      <img src="zpl.jpg" alt="ZPL">
+      <img src="blcs.png" alt="Charity Shield">
+
+    </div>
+
+    <!-- Country Flags -->
+    <div class="country-flags">
+      <img src="z.png" alt="Zambia">
+      <img src="sa.png" alt="South Africa">
+      <img src="ch.png" alt="China">
+      <img src="uae.png" alt="UAE">
+      <img src="ma.png" alt="Malaysia">
+    </div>
+
+<div>WELCOME TO THE ZPL CHARITY SHIELD 2025/26 SEASON</div>
+
+    <!-- Date & Time -->
+    <div id="currentDateTime">Current Time: --</div>
+  </header>
+
+  <!-- Club Logos Grid -->
+  <section class="club-grid">
+    <!-- Repeat 7x7 = 49 logos (replace with your club images) -->
+    <img src="club1.png" alt="Club 1">
+    <img src="club2.png" alt="Club 2">
+    <img src="club3.png" alt="Club 3">
+    <img src="club4.png" alt="Club 4">
+    <img src="club5.png" alt="Club 5">
+    <img src="club6.png" alt="Club 6">
+    <img src="club7.png" alt="Club 7">
+<img src="club1.png" alt="Club 8">
+    <img src="club2.png" alt="Club 9">
+    <img src="club3.png" alt="Club 10">
+    <img src="club4.png" alt="Club 11">
+    <img src="club5.png" alt="Club 12">
+    <img src="club6.png" alt="Club 13">
+    <img src="club7.png" alt="Club 14">
+<img src="club1.png" alt="Club 15">
+    <img src="club2.png" alt="Club 16">
+    <img src="club3.png" alt="Club 17">
+    <img src="club4.png" alt="Club 18">
+    <img src="club5.png" alt="Club 19">
+    <img src="club6.png" alt="Club 20">
+    <img src="club7.png" alt="Club 7">
+<img src="club1.png" alt="Club 1">
+    <img src="club2.png" alt="Club 2">
+    <img src="club3.png" alt="Club 3">
+    <img src="club4.png" alt="Club 4">
+    <img src="club5.png" alt="Club 5">
+    <img src="club6.png" alt="Club 6">
+    <img src="club7.png" alt="Club 7">
+<img src="club1.png" alt="Club 1">
+    <img src="club2.png" alt="Club 2">
+    <img src="club3.png" alt="Club 3">
+    <img src="club4.png" alt="Club 4">
+    <img src="club5.png" alt="Club 5">
+    <img src="club6.png" alt="Club 6">
+    <img src="club7.png" alt="Club 7">
+<img src="club1.png" alt="Club 1">
+    <img src="club2.png" alt="Club 2">
+    <img src="club3.png" alt="Club 3">
+    <img src="club4.png" alt="Club 4">
+    <img src="club5.png" alt="Club 5">
+    <img src="club6.png" alt="Club 6">
+    <img src="club7.png" alt="Club 7">
+<img src="club1.png" alt="Club 1">
+    <img src="club2.png" alt="Club 2">
+    <img src="club3.png" alt="Club 3">
+    <img src="club4.png" alt="Club 4">
+    <img src="club5.png" alt="Club 5">
+    <img src="club6.png" alt="Club 6">
+    <img src="club7.png" alt="Club 7">
+<img src="club1.png" alt="Club 1">
+    <img src="club2.png" alt="Club 2">
+    <img src="club3.png" alt="Club 3">
+    <img src="club4.png" alt="Club 4">
+    <img src="club5.png" alt="Club 5">
+    <img src="club6.png" alt="Club 6">
+    <img src="club7.png" alt="Club 7">
+<img src="club1.png" alt="Club 1">
+    <img src="club2.png" alt="Club 2">
+    <img src="club3.png" alt="Club 3">
+    <img src="club4.png" alt="Club 4">
+    <img src="club5.png" alt="Club 5">
+    <img src="club6.png" alt="Club 6">
+    <img src="club7.png" alt="Club 7">
+<img src="club1.png" alt="Club 1">
+    <img src="club2.png" alt="Club 2">
+    <img src="club3.png" alt="Club 3">
+    <img src="club4.png" alt="Club 4">
+    <img src="club5.png" alt="Club 5">
+    <img src="club6.png" alt="Club 6">
+    <img src="club7.png" alt="Club 7">
+    <!-- Repeat as needed for 49 clubs -->
+  </section>
+
+  <!-- Live Matches -->
+  <section class="live-matches">
+    <h2 style="text-align:center; margin-bottom: 15px;">Live Matches</h2>
+    <div class="matches-row">
+
+      <!-- Match Card 1 -->
+      <div class="match-card">
+        <div class="live-label" id="live1">LIVE</div>
+        <img src="club1.png" alt="Club A">
+        <div class="match-info">
+          <strong>2 - 1</strong><br>
+          <span id="matchTime1">--</span>
+        </div>
+        <img src="club2.png" alt="Club B">
+      </div>
+
+      <!-- Match Card 2 -->
+      <div class="match-card">
+        <div class="live-label" id="live2">LIVE</div>
+        <img src="club3.png" alt="Club C">
+        <div class="match-info">
+          <strong>0 - 3</strong><br>
+          <span id="matchTime2">--</span>
+        </div>
+        <img src="club4.png" alt="Club D">
+      </div>
+
+    </div>
+  </section>
+
+<section class="headline-news">
+  <h2>News Making Headlines</h2>
+  <div class="news-slider-container">
+    <button class="news-nav prev" onclick="slideNews(-1)">&#10094;</button>
+    
+    <div class="news-slider" id="newsSlider">
+      <div class="news-item">
+        <img src="news1.jpg" alt="Headline 1">
+        <p>Zambia Premier League kicks off with packed stadiums</p>
+      </div>
+      <div class="news-item">
+        <img src="news2.jpg" alt="Headline 2">
+        <p>Charity Shield final set for Lusaka showdown</p>
+      </div>
+      <div class="news-item">
+        <img src="news3.jpg" alt="Headline 3">
+        <p>Foreign clubs scout ZPL top talent</p>
+      </div>
+ <div class="news-item">
+        <img src="news1.jpg" alt="Headline 1">
+        <p>Zambia Premier League kicks off with packed stadiums</p>
+      </div>
+      <div class="news-item">
+        <img src="news2.jpg" alt="Headline 2">
+        <p>Charity Shield final set for Lusaka showdown</p>
+      </div>
+      <div class="news-item">
+        <img src="news3.jpg" alt="Headline 3">
+        <p>Foreign clubs scout ZPL top talent</p>
+      </div>
+      <!-- Add more news items as needed -->
+    </div>
+    
+    <button class="news-nav next" onclick="slideNews(1)">&#10095;</button>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <div class="footer">2025 Sande Tech Solutions | Zpl Charity Shield</div>
+
+  <!-- Live Script -->
+  <script>
+    const matchStartTimes = {
+      matchTime1: new Date("2025-05-21T12:46:00"),
+      matchTime2: new Date("2025-05-21T12:45:00")
+    };
+
+    function formatClock(date) {
+      return date.toLocaleTimeString('en-GB');
+    }
+
+    function formatFullDateTime(date) {
+      return date.toLocaleString('en-GB', {
+        weekday: 'short', year: 'numeric', month: 'short',
+        day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
+      });
+    }
+
+    function getMatchStatus(startTime, now) {
+      const diffMs = now - startTime;
+      const diffMin = Math.floor(diffMs / 60000);
+      if (diffMin < 0) return `Starts at ${startTime.toLocaleTimeString()}`;
+      else if (diffMin <= 45) return `First Half – ${diffMin} min | ${formatClock(now)}`;
+      else if (diffMin <= 90) return `Second Half – ${diffMin} min | ${formatClock(now)}`;
+      else return `Full Time | ${formatClock(now)}`;
+    }
+
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("currentDateTime").textContent = "Current Time: " + formatFullDateTime(now);
+
+      Object.entries(matchStartTimes).forEach(([id, startTime], index) => {
+        const status = getMatchStatus(startTime, now);
+        document.getElementById(id).textContent = status;
+
+        const liveLabel = document.getElementById(`live${index + 1}`);
+        if (now >= startTime && !status.includes("Full Time")) {
+          liveLabel.style.display = "block";
+        } else {
+          liveLabel.style.display = "none";
+        }
+      });
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+<script>
+  let currentNewsIndex = 0;
+  const slider = document.getElementById("newsSlider");
+  const items = document.querySelectorAll(".news-item");
+
+  function slideNews(direction) {
+    const totalItems = items.length;
+    const itemWidth = items[0].offsetWidth + 20; // width + margin
+
+    currentNewsIndex += direction;
+
+    // Clamp index
+    if (currentNewsIndex < 0) currentNewsIndex = 0;
+    if (currentNewsIndex > totalItems - 1) currentNewsIndex = totalItems - 1;
+
+    slider.style.transform = `translateX(-${itemWidth * currentNewsIndex}px)`;
+  }
+</script>
+
+</body>
+</html>

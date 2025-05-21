@@ -56,7 +56,8 @@
 
 .club-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  grid-template-columns: repeat(7, 1fr); /* exactly 7 columns */
+  grid-template-rows: repeat(7, auto);   /* exactly 7 rows */
   gap: 15px;
   padding: 20px;
   max-width: 1000px;

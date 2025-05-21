@@ -8,4 +8,4 @@ WELCOME TO THE ZAMBIA PREMIER LEAGUE OFFICIAL SITE
 
   
   <a href="DASHBOARD.html">Go to Zambian Premier League</a>
-@sande_tech_solutions | Football Association of Zambia
+Powered by: @sande_tech_solutions | Football Association of Zambia

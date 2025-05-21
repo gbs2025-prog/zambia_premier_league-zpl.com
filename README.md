@@ -1,9 +1,6 @@
-WELCOME TO THE ZAMBIA PREMIER LEAGUE OFFICIAL WEBSITE
+WELCOME TO THE ZAMBIA PREMIER LEAGUE OFFICIAL SITE
 
 
-
-
-The official zambia premier league site
 
 <p align="center">
   <img src="zpl.jpg" alt="ZPL Logo" width="300">

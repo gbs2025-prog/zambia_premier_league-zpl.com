@@ -141,27 +141,44 @@
   </tbody>
 </table>
 
+<!-- (Everything else remains the same above this point) -->
+
 <script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbytLKr9mNQObjJFu14eSGSyl1o7KTB4SAelr7LAl24ei-QsJ-rc8E5mEcbNdmHU0_Ml4g/exec"; // <-- replace this
+  const API_URL = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE"; // Replace this
 
+  // Fetch the current votes
   async function fetchVotes() {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    renderGrid(data);
-    renderTable(data);
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      renderGrid(data);
+      renderTable(data);
+    } catch (error) {
+      console.error("Error fetching votes:", error);
+    }
   }
 
+  // Send a vote to the backend and thank the user
   async function sendVote(id) {
-    await fetch(API_URL, {
-      method: 'POST',
-      body: JSON.stringify({ id }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    fetchVotes(); // Refresh votes after voting
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify({ id }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const result = await res.text();
+      alert("✅ Thank you for voting!");
+      fetchVotes(); // Refresh vote counts
+    } catch (error) {
+      alert("❌ Error submitting vote. Please try again.");
+      console.error("Vote error:", error);
+    }
   }
 
+  // Display the players in the grid
   function renderGrid(players) {
     const grid = document.getElementById("playerGrid");
     grid.innerHTML = "";
@@ -180,6 +197,7 @@
     });
   }
 
+  // Display the table of votes
   function renderTable(players) {
     const voteTable = document.getElementById("voteTable");
     voteTable.innerHTML = "";
@@ -194,8 +212,10 @@
     });
   }
 
+  // Load data when page starts
   fetchVotes();
 </script>
+
 
 </body>
 </html>

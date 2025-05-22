@@ -107,8 +107,47 @@ header .logo {
 .site-footer strong {
   color: #007bff; /* You can change this to match your branding */
 }
+    .voting-status {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#datetime {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.blinking {
+  animation: blinker 1s linear infinite;
+  font-size: 1.5em;
+  color: green;
+  font-weight: bold;
+}
+
+.closed {
+  font-size: 1.5em;
+  color: red;
+  font-weight: bold;
+  display: none;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
+  <div class="voting-status">
+  <div id="datetime"></div>
+  <div id="voteSticker" class="blinking">🗳️ Vote Now</div>
+  <div id="closedSticker" class="closed">❌ Voting Closed</div>
+    
+</div>
+  <a href="https://forms.gle/7jkeMMWeLviiJLy56" target="_blank" class="vote-link-button">🗳️ Click Here to Vote</a>
+</div>
+
 <body>
 
 <header>
@@ -590,6 +629,28 @@ header .logo {
   });
 
   renderPlayers(); // Initial load
+</script>
+<script>
+  // Set your voting deadline here
+  const deadline = new Date("2025-06-01T18:00:00").getTime(); // Example: June 1, 2025, 6:00 PM
+
+  function updateDateTime() {
+    const now = new Date();
+    const nowStr = now.toLocaleString();
+    document.getElementById("datetime").textContent = "Current Date & Time: " + nowStr;
+
+    if (now.getTime() >= deadline) {
+      document.getElementById("voteSticker").style.display = "none";
+      document.getElementById("closedSticker").style.display = "inline-block";
+    } else {
+      document.getElementById("voteSticker").style.display = "inline-block";
+      document.getElementById("closedSticker").style.display = "none";
+    }
+  }
+
+  // Update every second
+  setInterval(updateDateTime, 1000);
+  updateDateTime(); // Initial call
 </script>
 
 </body>

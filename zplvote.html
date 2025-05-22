@@ -144,78 +144,54 @@
 <!-- (Everything else remains the same above this point) -->
 
 <script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbw4hA1P2DoJbgBVAVtH41vyA99Mit6ffk3lWIGRzOZYop6F-MB2U1p6G-xCXksllsKSlw/exec"; // Replace this
+const API_URL = "https://script.google.com/macros/s/YOUR_WEB_APP_URL/exec"; // Replace with your real URL
 
-  // Fetch the current votes
-  async function fetchVotes() {
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      renderGrid(data);
-      renderTable(data);
-    } catch (error) {
-      console.error("Error fetching votes:", error);
-    }
-  }
+async function fetchPlayers() {
+  const res = await fetch(API_URL);
+  return res.json();
+}
 
-  // Send a vote to the backend and thank the user
-  async function sendVote(id) {
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        body: JSON.stringify({ id }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+async function renderPlayers() {
+  const players = await fetchPlayers();
+  const grid = document.getElementById("playerGrid");
+  const voteTable = document.getElementById("voteTable");
+  grid.innerHTML = '';
+  voteTable.innerHTML = '';
 
-      const result = await res.text();
-      alert("✅ Thank you for voting!");
-      fetchVotes(); // Refresh vote counts
-    } catch (error) {
-      alert("❌ Error submitting vote. Please try again.");
-      console.error("Vote error:", error);
-    }
-  }
+  players.forEach(player => {
+    const card = document.createElement("div");
+    card.className = "player-card";
+    card.innerHTML = `
+      <img src="${player.image}" alt="${player.name}">
+      <div class="player-info">
+        <h4>${player.name}</h4>
+        <p>${player.club}</p>
+        <button class="vote-btn" onclick="castVote(${player.id})">Vote</button>
+      </div>
+    `;
+    grid.appendChild(card);
 
-  // Display the players in the grid
-  function renderGrid(players) {
-    const grid = document.getElementById("playerGrid");
-    grid.innerHTML = "";
-    players.forEach(player => {
-      const card = document.createElement("div");
-      card.className = "player-card";
-      card.innerHTML = `
-        <img src="${player.image || 'placeholder.jpg'}" alt="${player.name}">
-        <div class="player-info">
-          <h4>${player.name}</h4>
-          <p>${player.club}</p>
-          <button class="vote-btn" onclick="sendVote(${player.id})">Vote</button>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${player.name}</td>
+      <td>${player.club}</td>
+      <td>${player.votes}</td>
+    `;
+    voteTable.appendChild(row);
+  });
+}
 
-  // Display the table of votes
-  function renderTable(players) {
-    const voteTable = document.getElementById("voteTable");
-    voteTable.innerHTML = "";
-    players.forEach(player => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${player.name}</td>
-        <td>${player.club}</td>
-        <td>${player.votes}</td>
-      `;
-      voteTable.appendChild(row);
-    });
-  }
+async function castVote(id) {
+  await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({ id }),
+    headers: { "Content-Type": "application/json" }
+  });
+  alert("✅ Thank you for voting!");
+  renderPlayers(); // refresh results
+}
 
-  // Load data when page starts
-  fetchVotes();
+renderPlayers();
 </script>
-
-
 </body>
 </html>

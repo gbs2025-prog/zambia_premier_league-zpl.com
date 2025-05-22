@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ZPL Player Voting</title>
+  <title>ZPL Player of the Season Voting</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f2f2f2;
       margin: 0;
-      padding: 0;
       text-align: center;
     }
     header img {
@@ -17,17 +16,14 @@
       margin: 20px auto;
       display: block;
     }
-    .news-ticker {
-      background-color: green;
+    .ticker {
+      background: green;
       color: white;
       padding: 10px;
-      overflow: hidden;
-      white-space: nowrap;
-      animation: scroll-left 15s linear infinite;
-      border-top: 5px solid red;
-      border-bottom: 5px solid black;
+      font-weight: bold;
+      animation: ticker 10s linear infinite;
     }
-    @keyframes scroll-left {
+    @keyframes ticker {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
@@ -39,8 +35,8 @@
     }
     .player-card {
       background: white;
+      border: 3px solid #007a33;
       border-radius: 10px;
-      border: 3px solid green;
       padding: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
@@ -49,22 +45,25 @@
       border-radius: 8px;
     }
     .player-info h4 {
-      margin: 5px 0 0;
+      margin: 10px 0 5px 0;
+      font-size: 16px;
     }
     .player-info p {
-      margin: 5px 0;
+      margin: 0;
+      font-size: 14px;
+      color: #444;
     }
     .vote-btn {
+      margin-top: 10px;
       padding: 5px 10px;
-      background-color: green;
+      background-color: #007a33;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 10px;
     }
     .vote-btn:hover {
-      background-color: darkgreen;
+      background-color: #005e26;
     }
     table {
       margin: 30px auto;
@@ -72,32 +71,32 @@
       max-width: 800px;
       border-collapse: collapse;
     }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
     th, td {
       padding: 10px;
+      border: 1px solid #ccc;
     }
     th {
-      background-color: #333;
+      background-color: #007a33;
       color: white;
     }
     td {
-      background-color: white;
+      background: white;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="zpl.jpg" alt="ZPL Logo">
+  <img src="zpl-logo.png" alt="ZPL Logo">
 </header>
 
-<div class="news-ticker">🏆 Vote for your favorite Zambian Premier League Player of the Season – Live results below! 🇿🇲</div>
+<div class="ticker">
+  📰 Vote for your 2025 ZPL Player of the Season now! 🇿🇲
+</div>
 
 <div class="grid" id="playerGrid"></div>
 
-<h2>🗳️ Live Voting Results</h2>
+<h2>📊 Live Voting Results</h2>
 <table>
   <thead>
     <tr>
@@ -110,54 +109,63 @@
 </table>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycby9gqlCU0E5PXyBf2tXpDhKFgxhfM_wE9xLMRQo_5lY3b2sNUUVmN7nlLkYecnEFRNuFg/exec"; // Replace with your real URL
+  const API_URL = "https://script.google.com/macros/s/AKfycbyZQAWjoO708MFBROafa0pPGVz1XA6vlEPBGmNM8nyK1XXs8rjjZx42gX-IZabMpO-fIA/exec"; // Replace with your actual Apps Script Web App URL
 
-async function fetchPlayers() {
-  const res = await fetch(API_URL);
-  return res.json();
-}
+  async function fetchPlayers() {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    return data;
+  }
 
-async function renderPlayers() {
-  const players = await fetchPlayers();
-  const grid = document.getElementById("playerGrid");
-  const voteTable = document.getElementById("voteTable");
-  grid.innerHTML = '';
-  voteTable.innerHTML = '';
+  async function castVote(id) {
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ id })
+      });
 
-  players.forEach(player => {
-    const card = document.createElement("div");
-    card.className = "player-card";
-    card.innerHTML = `
-      <img src="${player.image}" alt="${player.name}">
-      <div class="player-info">
-        <h4>${player.name}</h4>
-        <p>${player.club}</p>
-        <button class="vote-btn" onclick="castVote(${player.id})">Vote</button>
-      </div>
-    `;
-    grid.appendChild(card);
+      const msg = await res.text();
+      alert("✅ Thank you for voting!\n" + msg);
+      render();
+    } catch (e) {
+      console.error(e);
+      alert("❌ Voting failed. Try again.");
+    }
+  }
 
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${player.name}</td>
-      <td>${player.club}</td>
-      <td>${player.votes}</td>
-    `;
-    voteTable.appendChild(row);
-  });
-}
+  async function render() {
+    const players = await fetchPlayers();
+    const grid = document.getElementById("playerGrid");
+    const table = document.getElementById("voteTable");
 
-async function castVote(id) {
-  await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({ id }),
-    headers: { "Content-Type": "application/json" }
-  });
-  alert("✅ Thank you for voting!");
-  renderPlayers(); // refresh results
-}
+    grid.innerHTML = '';
+    table.innerHTML = '';
 
-renderPlayers();
+    players.forEach(player => {
+      const card = document.createElement("div");
+      card.className = "player-card";
+      card.innerHTML = `
+        <img src="${player.image}" alt="${player.name}">
+        <div class="player-info">
+          <h4>${player.name}</h4>
+          <p>${player.club}</p>
+          <button class="vote-btn" onclick="castVote(${player.id})">Vote</button>
+        </div>
+      `;
+      grid.appendChild(card);
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${player.name}</td>
+        <td>${player.club}</td>
+        <td>${player.votes}</td>
+      `;
+      table.appendChild(row);
+    });
+  }
+
+  render();
 </script>
 
 </body>
